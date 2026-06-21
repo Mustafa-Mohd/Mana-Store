@@ -22,6 +22,7 @@ import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
 import AdminPage from "./pages/AdminPage";
 import AgentBot from "./components/AgentBot";
+import VapiButton from "./components/VapiButton";
 import { CartProvider } from "./helper/CartContext";
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
         />
       </Routes>
       <AgentBot />
+      <VapiButton />
     </BrowserRouter>
     </CartProvider>
   );

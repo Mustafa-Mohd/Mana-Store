@@ -69,6 +69,19 @@ html.lenis, html.lenis body {
   background: linear-gradient(90deg, #fff, #888);
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-shoe {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  width: 50vw;
+  max-width: 600px;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(20px 30px 40px rgba(0,0,0,0.5));
 }
 
 /* REVEAL SECTIONS */

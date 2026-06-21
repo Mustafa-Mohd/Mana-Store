@@ -4,3 +4,11 @@
 @import "slick-carousel/slick/slick-theme.css";
 @import 'select2/dist/css/select2.min.css';
 @import "/public/assets/sass/main.scss";
+
+// Global override for external product images to prevent layout blowout
+.product-card__thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  max-width: 100% !important;
+}

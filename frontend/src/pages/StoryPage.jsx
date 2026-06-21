@@ -37,6 +37,21 @@ const StoryPage = () => {
         }
       );
 
+      // Nike 3D Shoe Floating Animation
+      gsap.to(".hero-shoe", {
+        y: 400,
+        x: 150,
+        rotation: -25,
+        scale: 1.3,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".story-hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1
+        }
+      });
+
       // Scroll triggered image reveal
       gsap.utils.toArray('.reveal-section').forEach(section => {
         gsap.fromTo(
@@ -70,6 +85,13 @@ const StoryPage = () => {
             <div className="line"><span>YOUR</span></div>
             <div className="line"><span className="highlight">LIFESTYLE</span></div>
           </div>
+          
+          <img 
+            className="hero-shoe" 
+            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/jordan.png" 
+            alt="Floating Shoe" 
+          />
+
           <motion.div 
             className="hero-background"
             style={{ scale }}
