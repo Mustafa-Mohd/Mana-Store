@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
+
+.story-container {
+  font-family: 'Outfit', sans-serif;
+  background-color: #050505;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* LENIS REQUIRED CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* HERO SECTION */
+.story-hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(30, 30, 35, 1) 0%, rgba(5, 5, 5, 1) 100%);
+  z-index: 0;
+}
+
+.intro-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-weight: 900;
+  font-size: 8vw;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.intro-text .line {
+  overflow: hidden;
+}
+
+.intro-text .line span {
+  display: inline-block;
+}
+
+.intro-text .highlight {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
+  background: linear-gradient(90deg, #fff, #888);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* REVEAL SECTIONS */
+.reveal-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5% 10%;
+}
+
+.reveal-section.section-dark {
+  background-color: #050505;
+}
+
+.reveal-section.section-light {
+  background-color: #111;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reveal-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.reveal-content h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  background: linear-gradient(45deg, #fff, #555);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reveal-content p {
+  font-size: 1.25rem;
+  color: #aaa;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.reveal-image-container {
+  flex: 1;
+  height: 60vh;
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.reveal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8) contrast(1.2);
+}
+
+/* CTA SECTION */
+.story-cta {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url('https://images.unsplash.com/photo-1618220179428-22790b46a0eb?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+  position: relative;
+}
+
+.story-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.cta-content h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.cta-content p {
+  font-size: 1.5rem;
+  color: #ddd;
+  margin-bottom: 3rem;
+}
+
+.enter-store-btn {
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #000;
+  background: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.enter-store-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.8), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.enter-store-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+}
+
+.enter-store-btn:hover::after {
+  transform: translateX(100%);
+}
+
+@media (max-width: 768px) {
+  .reveal-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .reveal-image-container {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .intro-text { font-size: 12vw; }
+  .reveal-content h2 { font-size: 2.5rem; }
+  .cta-content h1 { font-size: 3rem; }
+}

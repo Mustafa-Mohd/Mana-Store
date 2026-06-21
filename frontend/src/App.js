@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RouteScrollToTop from "./helper/RouteScrollToTop";
 import HomePageOne from "./pages/HomePageOne";
+import StoryPage from "./pages/StoryPage";
 import HomePageTwo from "./pages/HomePageTwo";
 import HomePageThree from "./pages/HomePageThree";
 import ShopPage from "./pages/ShopPage";
@@ -31,7 +32,8 @@ function App() {
       <PhosphorIconInit />
 
       <Routes>
-        <Route exact path='/' element={<HomePageOne />} />
+        <Route exact path='/' element={<StoryPage />} />
+        <Route exact path='/home' element={<HomePageOne />} />
         <Route exact path='/index-two' element={<HomePageTwo />} />
         <Route exact path='/index-three' element={<HomePageThree />} />
         <Route exact path='/shop' element={<ShopPage />} />
