@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import { getCountdown } from '../helper/Countdown';
+import LiveInventoryBadge from './LiveInventoryBadge';
+import { toast } from 'react-hot-toast';
 
 const ProductDetailsTwo = () => {
     const [timeLeft, setTimeLeft] = useState(getCountdown());
@@ -26,6 +28,32 @@ const ProductDetailsTwo = () => {
     const [quantity, setQuantity] = useState(1);
     const incrementQuantity = () => setQuantity(quantity + 1);
     const decrementQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : quantity);
+
+    const productId = "demo-product-123"; // Mock product ID for demo
+
+    const handleBuyNow = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5000/api/checkout/process', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ items: [{ id: productId, qty: quantity }], userId: 'user_1' })
+            });
+            const data = await response.json();
+            if (response.status === 409) {
+                toast.error(data.message || 'Product currently being purchased by another user!');
+            } else if (response.status === 400) {
+                toast.error(data.message || 'Out of stock!');
+            } else if (response.ok) {
+                toast.success('Purchase successful!');
+            } else {
+                toast.error('An error occurred.');
+            }
+        } catch (error) {
+            console.error('Checkout error:', error);
+            toast.error('Failed to process checkout.');
+        }
+    };
 
 
     const [mainImage, setMainImage] = useState(productImages[0]);
@@ -97,6 +125,7 @@ const ProductDetailsTwo = () => {
                                             Remains untill the end of the offer
                                         </span>
                                     </div>
+                                    <LiveInventoryBadge productId={productId} initialStock={21} />
                                     <h5 className="mb-12">
                                         HP Chromebook With Intel Celeron, 4GB Memory &amp; 64GB eMMC -
                                         Modern Gray
@@ -289,7 +318,7 @@ const ProductDetailsTwo = () => {
                                     htmlFor="stock"
                                     className="text-lg mb-8 text-heading fw-semibold d-block"
                                 >
-                                    Total Stock: 21
+                                    Total Stock: <LiveInventoryBadge productId={productId} initialStock={21} />
                                 </label>
                                 <span className="text-xl d-flex">
                                     <i className="ph ph-location" />
@@ -337,6 +366,7 @@ const ProductDetailsTwo = () => {
                             </Link>
                             <Link
                                 to="#"
+                                onClick={handleBuyNow}
                                 className="btn btn-outline-main rounded-8 py-16 fw-normal mt-16 w-100"
                             >
                                 Buy Now

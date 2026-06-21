@@ -214,16 +214,16 @@ $font-sizes: (
   --display-one: clamp(2.5rem, -0.0733rem + 6.3692vw, 7.5rem); // Min:40px - Max:120px
   /* Font Size End */
 
-  /* template main color - ValkeyBlue #6983FF */
-  --main-h: 230;
+  /* template main color - Mana Teal */
+  --main-h: 175;
   --main-s: 100%;
-  --main-l: 71%;
+  --main-l: 40%;
   --main: var(--main-h) var(--main-s) var(--main-l);
 
-  /* template secondary color - ValkeyPurple #30176E */
-  --main-two-h: 257;
-  --main-two-s: 65%;
-  --main-two-l: 26%;
+  /* template secondary color - Deep Midnight */
+  --main-two-h: 220;
+  --main-two-s: 80%;
+  --main-two-l: 15%;
   --main-two: var(--main-two-h) var(--main-two-s) var(--main-two-l);
 
    /* Valkey Brand Colors */
@@ -247,10 +247,10 @@ $font-sizes: (
   --body-bg: var(--gray);
   --border-color: 210 29% 87%;
 
-  --bg-color-one: #F7FBFE; 
-  --bg-color-two: #FFFDFA; 
-  --bg-color-three: #D3DDE7; 
-  --neutral: #1A2026; 
+  --bg-color-one: #F0FDF4; 
+  --bg-color-two: #FFFFFF; 
+  --bg-color-three: #CCFBF1; 
+  --neutral: #0F172A; 
 
   --translate-x-middle: translateX(-50%); 
   --translate-y-middle: translateY(-50%); 

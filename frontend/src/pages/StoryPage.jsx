@@ -23,19 +23,7 @@ const StoryPage = () => {
   
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      // Intro Text Animation
-      gsap.fromTo(
-        ".intro-text .line span",
-        { y: 100, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          stagger: 0.1, 
-          duration: 1.5, 
-          ease: "power4.out",
-          delay: 0.5
-        }
-      );
+      // Intro Text Animation removed per user request
 
       // Nike 3D Shoe Floating Animation
       gsap.to(".hero-shoe", {
@@ -79,23 +67,15 @@ const StoryPage = () => {
       <div className="story-container" ref={containerRef}>
         
         {/* HERO SECTION */}
-        <section className="story-hero">
-          <div className="intro-text">
-            <div className="line"><span>ELEVATE</span></div>
-            <div className="line"><span>YOUR</span></div>
-            <div className="line"><span className="highlight">LIFESTYLE</span></div>
-          </div>
-          
-          <img 
-            className="hero-shoe" 
-            src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/jordan.png" 
-            alt="Floating Shoe" 
-          />
-
-          <motion.div 
-            className="hero-background"
-            style={{ scale }}
-          />
+        <section 
+          className="story-hero"
+          style={{
+            backgroundImage: `url('https://res.cloudinary.com/dcefror3c/image/upload/v1782031066/ChatGPT_Image_Jun_21_2026_02_07_26_PM_tzgwlg.png')`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
         </section>
 
         {/* PARALLAX SECTIONS */}

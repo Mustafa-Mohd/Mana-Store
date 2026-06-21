@@ -76,16 +76,16 @@ const AgentBot = () => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="position-fixed flex-center bg-main-600 text-white rounded-circle shadow"
-        style={{ bottom: '20px', right: '20px', width: '60px', height: '60px', zIndex: 9999, border: 'none', cursor: 'pointer' }}
+        style={{ bottom: '20px', right: '20px', width: '50px', height: '50px', zIndex: 9999, border: 'none', cursor: 'pointer' }}
       >
-        <i className={`text-2xl ${isOpen ? 'ph ph-x' : 'ph ph-chats'}`}></i>
+        <i className={`text-xl ${isOpen ? 'ph ph-x' : 'ph ph-chats'}`}></i>
       </button>
 
       {/* Chat Window */}
       {isOpen && (
         <div 
           className="position-fixed bg-white shadow rounded-16 d-flex flex-column"
-          style={{ bottom: '90px', right: '20px', width: '350px', height: '500px', zIndex: 9999, overflow: 'hidden', border: '1px solid #eee' }}
+          style={{ bottom: '80px', right: '20px', width: '350px', height: '500px', zIndex: 9999, overflow: 'hidden', border: '1px solid #eee' }}
         >
           {/* Header */}
           <div className="bg-main-600 text-white p-16 flex-between">

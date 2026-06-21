@@ -40,11 +40,11 @@ const VapiButton = () => {
       onClick={toggleCall}
       style={{
         position: 'fixed',
-        top: '100px',
-        right: '40px',
+        bottom: '20px',
+        right: '80px',
         borderRadius: '50%',
-        width: '70px',
-        height: '70px',
+        width: '50px',
+        height: '50px',
         backgroundColor: callStatus === 'active' ? '#ff3b30' : '#007aff',
         color: 'white',
         border: 'none',
@@ -59,9 +59,9 @@ const VapiButton = () => {
       }}
       title="Talk to AI Assistant"
     >
-      {callStatus === 'active' && <Square size={30} fill="currentColor" />}
-      {callStatus === 'loading' && <Loader size={30} className="spinner" />}
-      {callStatus === 'inactive' && <Mic size={30} />}
+      {callStatus === 'active' && <Square size={24} fill="currentColor" />}
+      {callStatus === 'loading' && <Loader size={24} className="spinner" />}
+      {callStatus === 'inactive' && <Mic size={24} />}
 
       <style>{`
         @keyframes spin { 100% { transform: rotate(360deg); } }

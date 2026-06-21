@@ -21,14 +21,17 @@ import VendorTwoDetailsPage from "./pages/VendorTwoDetailsPage";
 import BecomeSellerPage from "./pages/BecomeSellerPage";
 import WishlistPage from "./pages/WishlistPage";
 import AdminPage from "./pages/AdminPage";
+import AdminDashboard from "./pages/AdminDashboard";
 import AgentBot from "./components/AgentBot";
 import VapiButton from "./components/VapiButton";
+import { Toaster } from 'react-hot-toast';
 import { CartProvider } from "./helper/CartContext";
 
 function App() {
   return (
     <CartProvider>
     <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
       <RouteScrollToTop />
       <PhosphorIconInit />
 
@@ -57,6 +60,7 @@ function App() {
         <Route exact path='/blog-details' element={<BlogDetailsPage />} />
         <Route exact path='/contact' element={<ContactPage />} />
         <Route exact path='/admin' element={<AdminPage />} />
+        <Route exact path='/admin-dashboard' element={<AdminDashboard />} />
         <Route exact path='/vendor' element={<VendorPage />} />
         <Route exact path='/vendor-details' element={<VendorDetailsPage />} />
         <Route exact path='/vendor-two' element={<VendorTwoPage />} />

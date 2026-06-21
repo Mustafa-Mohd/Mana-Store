@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
 const valkeyClient = require('./valkeyClient');
 
 const authRoutes = require('./routes/auth');
@@ -17,8 +19,17 @@ const cartRoutes = require('./routes/cart');
 const checkoutRoutes = require('./routes/checkout');
 const deliveryRoutes = require('./routes/delivery');
 const recommendationsRoutes = require('./routes/recommendations');
+const inventoryRoutes = require('./routes/inventory');
+const PubSubService = require('./services/pubsubService');
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 const PORT = process.env.PORT || 5000;
 
 // Middleware
@@ -50,6 +61,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/checkout', checkoutRoutes);
 app.use('/api/delivery', deliveryRoutes);
 app.use('/api/recommendations', recommendationsRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -66,7 +78,11 @@ app.get('/metrics', async (req, res) => {
 const startServer = async () => {
   try {
     await valkeyClient.connect();
-    app.listen(PORT, () => {
+    
+    // Initialize PubSub and WebSockets
+    await PubSubService.init(io);
+    
+    server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
