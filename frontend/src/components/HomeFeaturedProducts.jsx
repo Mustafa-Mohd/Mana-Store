@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../helper/CartContext';
+import { useCompare } from '../helper/CompareContext';
+import toast from 'react-hot-toast';
 
 const HomeFeaturedProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { addToCart, decrementFromCart, cartItems } = useCart();
+  const { addToCompare } = useCompare();
   const getQty = (id) => cartItems.find(i => i.id === id)?.qty || 0;
 
   useEffect(() => {
@@ -61,7 +64,7 @@ const HomeFeaturedProducts = () => {
               <div
                 key={p.id}
                 style={{
-                  background: '#fff',
+                  background: 'var(--bg-color-two)',
                   borderRadius: 16,
                   overflow: 'hidden',
                   border: '1px solid #f0f0f0',
@@ -80,7 +83,7 @@ const HomeFeaturedProducts = () => {
                 }}
               >
                 {/* Image */}
-                <Link to={`/product-details-two?id=${p.id}`} style={{ display: 'block', aspectRatio: '1', overflow: 'hidden', background: '#f5f5f5' }}>
+                <Link to={`/product-details-two?id=${p.id}`} style={{ display: 'block', aspectRatio: '1', overflow: 'hidden', background: 'var(--bg-color-one)' }}>
                   {img ? (
                     <img
                       src={img}
@@ -109,7 +112,7 @@ const HomeFeaturedProducts = () => {
                   {/* Name */}
                   <Link
                     to={`/product-details-two?id=${p.id}`}
-                    style={{ textDecoration: 'none', color: '#1f2937', fontWeight: 600, fontSize: 14, lineHeight: 1.4, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                    style={{ textDecoration: 'none', color: 'var(--heading-color)', fontWeight: 600, fontSize: 14, lineHeight: 1.4, marginBottom: 8, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
                   >
                     {p.name}
                   </Link>
@@ -126,33 +129,54 @@ const HomeFeaturedProducts = () => {
                     </div>
 
                     {/* Cart button / stepper */}
-                    {qty > 0 ? (
-                      <div style={{ display: 'flex', alignItems: 'center', border: '2px solid #FF6B2C', borderRadius: 10, overflow: 'hidden' }}>
-                        <button
-                          onClick={() => decrementFromCart(p.id)}
-                          style={{ background: '#FF6B2C', color: '#fff', border: 'none', padding: '8px 14px', fontSize: 16, cursor: 'pointer', fontWeight: 700 }}
-                        >−</button>
-                        <span style={{ flex: 1, textAlign: 'center', fontWeight: 700, color: '#1f2937' }}>{qty}</span>
-                        <button
-                          onClick={() => addToCart(p)}
-                          style={{ background: '#FF6B2C', color: '#fff', border: 'none', padding: '8px 14px', fontSize: 16, cursor: 'pointer', fontWeight: 700 }}
-                        >+</button>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'stretch' }}>
+                      <div style={{ flex: 1 }}>
+                        {qty > 0 ? (
+                          <div style={{ display: 'flex', height: '100%', alignItems: 'center', border: '2px solid #FF6B2C', borderRadius: 10, overflow: 'hidden' }}>
+                            <button
+                              onClick={() => decrementFromCart(p.id)}
+                              style={{ background: '#FF6B2C', height: '100%', color: '#fff', border: 'none', padding: '8px 14px', fontSize: 16, cursor: 'pointer', fontWeight: 700 }}
+                            >−</button>
+                            <span style={{ flex: 1, textAlign: 'center', fontWeight: 700, color: 'var(--heading-color)' }}>{qty}</span>
+                            <button
+                              onClick={() => addToCart(p)}
+                              style={{ background: '#FF6B2C', height: '100%', color: '#fff', border: 'none', padding: '8px 14px', fontSize: 16, cursor: 'pointer', fontWeight: 700 }}
+                            >+</button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={() => addToCart(p)}
+                            style={{
+                              width: '100%', height: '100%', padding: '10px 0', borderRadius: 10, border: 'none',
+                              background: '#FF6B2C', color: '#fff', fontWeight: 600, fontSize: 13,
+                              cursor: 'pointer', transition: 'background 0.2s',
+                              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = '#e55a1c'}
+                            onMouseLeave={e => e.currentTarget.style.background = '#FF6B2C'}
+                          >
+                            <i className="ph ph-shopping-cart" /> Add to Cart
+                          </button>
+                        )}
                       </div>
-                    ) : (
                       <button
-                        onClick={() => addToCart(p)}
-                        style={{
-                          width: '100%', padding: '10px 0', borderRadius: 10, border: 'none',
-                          background: '#FF6B2C', color: '#fff', fontWeight: 600, fontSize: 13,
-                          cursor: 'pointer', transition: 'background 0.2s',
-                          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                        onClick={() => {
+                          addToCompare(p);
+                          toast.success('Added to Compare');
                         }}
-                        onMouseEnter={e => e.currentTarget.style.background = '#e55a1c'}
-                        onMouseLeave={e => e.currentTarget.style.background = '#FF6B2C'}
+                        style={{
+                          width: '40px', height: 'auto', borderRadius: 10, border: '1px solid var(--border-color)',
+                          background: 'var(--bg-color-two)', color: 'var(--body-color)', cursor: 'pointer',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--bg-color-one)'; e.currentTarget.style.color = '#FF6B2C'; e.currentTarget.style.borderColor = '#FF6B2C'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'var(--bg-color-two)'; e.currentTarget.style.color = 'var(--body-color)'; e.currentTarget.style.borderColor = 'var(--border-color)'; }}
+                        title="Compare"
                       >
-                        <i className="ph ph-shopping-cart" /> Add to Cart
+                        <i className="ph ph-arrows-left-right text-lg" />
                       </button>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>

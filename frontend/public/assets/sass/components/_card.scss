@@ -1,6 +1,17 @@
 /* ================= Common Card Css Start ========================= */
 .common-card {
     border: 0;
+    border-radius: 16px;
+    background-color: var(--bg-color-two);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-style: preserve-3d;
+    
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
     .card-header, .card-footer {
         padding: 12px 24px;
         background-color: transparent;

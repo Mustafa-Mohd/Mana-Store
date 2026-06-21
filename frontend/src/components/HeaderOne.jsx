@@ -166,9 +166,9 @@ const HeaderOne = () => {
         >
           <i className='ph ph-x' />{" "}
         </button>
-        <div className='mobile-menu__inner'>
+        <div className='mobile-menu__close d-flex justify-content-between align-items-center w-100 d-lg-none p-24 border-bottom border-gray-100'>
           <Link to='/' className='mobile-menu__logo'>
-            <img src='assets/images/logo/logo.png' alt='Logo' />
+            <img src='assets/images/logo/logo.png' alt='Logo' style={{ width: '160px', height: 'auto', objectFit: 'contain', borderRadius: '0' }} />
           </Link>
           <div className='mobile-menu__menu'>
             {/* Nav Menu Start */}
@@ -726,7 +726,7 @@ const HeaderOne = () => {
             {/* Logo Start */}
             <div className='logo'>
               <Link to='/' className='link'>
-                <img src='assets/images/logo/logo.png' alt='Logo' />
+                <img src='assets/images/logo/logo.png' alt='Logo' style={{ width: '180px', height: 'auto', objectFit: 'contain', borderRadius: '0' }} />
               </Link>
             </div>
             {/* Logo End  */}
@@ -912,7 +912,7 @@ const HeaderOne = () => {
                   {/* Logo Start */}
                   <div className='logo px-16 d-lg-none d-block'>
                     <Link to='/' className='link'>
-                      <img src='assets/images/logo/logo.png' alt='Logo' />
+                      <img src='assets/images/logo/logo.png' alt='Logo' style={{ width: '150px', height: 'auto', objectFit: 'contain', borderRadius: '0' }} />
                     </Link>
                   </div>
                   {/* Logo End */}

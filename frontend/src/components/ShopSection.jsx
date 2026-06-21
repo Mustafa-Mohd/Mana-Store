@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import ReactSlider from 'react-slider'
 import AdBanner from './AdBanner'
 import { useCart } from '../helper/CartContext'
+import { useCompare } from '../helper/CompareContext'
+import toast from 'react-hot-toast'
 
 const ShopSection = () => {
 
@@ -12,6 +14,7 @@ const ShopSection = () => {
     let [products, setProducts] = useState([])
     let [loading, setLoading] = useState(true)
     const { addToCart, decrementFromCart, cartItems } = useCart()
+    const { addToCompare } = useCompare()
     const getCartQty = (id) => (cartItems.find(i => i.id === id)?.qty || 0)
 
     const location = useLocation();
@@ -751,26 +754,41 @@ const ShopSection = () => {
                                                     ${product.price?.amount || '0.00'} <span className="text-gray-500 fw-normal">/Qty</span>{" "}
                                                 </span>
                                             </div>
-                                            {getCartQty(product.id) > 0 ? (
-                                                <div className="flex-align border border-main-600 rounded-8 overflow-hidden mt-12">
-                                                    <button
-                                                        onClick={() => decrementFromCart(product.id)}
-                                                        className="btn bg-main-600 text-white px-16 py-11 fw-semibold text-xl"
-                                                    >−</button>
-                                                    <span className="flex-center px-20 py-11 fw-semibold text-heading">{getCartQty(product.id)}</span>
-                                                    <button
-                                                        onClick={() => addToCart(product)}
-                                                        className="btn bg-main-600 text-white px-16 py-11 fw-semibold text-xl"
-                                                    >+</button>
+                                            <div style={{ display: 'flex', gap: '8px', alignItems: 'stretch' }}>
+                                                <div style={{ flex: 1 }}>
+                                                    {getCartQty(product.id) > 0 ? (
+                                                        <div className="flex-align border border-main-600 rounded-8 overflow-hidden mt-12 h-100">
+                                                            <button
+                                                                onClick={() => decrementFromCart(product.id)}
+                                                                className="btn bg-main-600 text-white px-16 py-11 fw-semibold text-xl h-100"
+                                                            >−</button>
+                                                            <span className="flex-center flex-grow-1 px-20 py-11 fw-semibold text-heading h-100">{getCartQty(product.id)}</span>
+                                                            <button
+                                                                onClick={() => addToCart(product)}
+                                                                className="btn bg-main-600 text-white px-16 py-11 fw-semibold text-xl h-100"
+                                                            >+</button>
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            onClick={() => addToCart(product)}
+                                                            className="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-8 flex-center gap-8 fw-medium w-100 mt-12 h-100"
+                                                        >
+                                                            Add To Cart <i className="ph ph-shopping-cart" />
+                                                        </button>
+                                                    )}
                                                 </div>
-                                            ) : (
                                                 <button
-                                                    onClick={() => addToCart(product)}
-                                                    className="product-card__cart btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white py-11 px-24 rounded-8 flex-center gap-8 fw-medium w-100 mt-12"
+                                                    onClick={() => {
+                                                        addToCompare(product);
+                                                        toast.success('Added to Compare');
+                                                    }}
+                                                    className="btn bg-gray-50 text-heading hover-bg-main-600 hover-text-white rounded-8 flex-center mt-12"
+                                                    style={{ width: '48px', flexShrink: 0 }}
+                                                    title="Compare"
                                                 >
-                                                    Add To Cart <i className="ph ph-shopping-cart" />
+                                                    <i className="ph ph-arrows-left-right text-lg" />
                                                 </button>
-                                            )}
+                                            </div>
                                         </div>
                                     </div>
                                 ))

@@ -21,6 +21,12 @@ const StoryPage = () => {
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   
+  const handleItemClick = (media, index) => {
+    if (media && media.text) {
+      navigate(`/shop?q=${media.text.toLowerCase()}`);
+    }
+  };
+  
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
       // Intro Text Animation removed per user request
@@ -129,6 +135,7 @@ const StoryPage = () => {
                 { image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop", text: "Smart Watches" },
                 { image: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800&auto=format&fit=crop", text: "Cameras" }
               ]}
+              onItemClick={handleItemClick}
             />
           </div>
         </section>

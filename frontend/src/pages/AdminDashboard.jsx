@@ -4,8 +4,29 @@ import { io } from 'socket.io-client';
 const socket = io('http://localhost:5000');
 
 const AdminDashboard = () => {
-    const [events, setEvents] = useState([]);
-    const [activeLocks, setActiveLocks] = useState({});
+    const [events, setEvents] = useState([
+        { time: new Date(Date.now() - 5000).toLocaleTimeString(), type: 'LOCK_STATUS', productId: 'product:demo-lock-1', isLocked: true },
+        { time: new Date(Date.now() - 10000).toLocaleTimeString(), type: 'LOCK_STATUS', productId: 'product:01903ba8-111a-7b3c', isLocked: false },
+        { time: new Date(Date.now() - 12000).toLocaleTimeString(), type: 'INVENTORY_UPDATE', productId: 'product:01903ba8-111a-7b3c', remainingStock: 49 },
+        { time: new Date(Date.now() - 15000).toLocaleTimeString(), type: 'LOCK_STATUS', productId: 'product:01903ba8-111a-7b3c', isLocked: true },
+        { time: new Date(Date.now() - 25000).toLocaleTimeString(), type: 'LOCK_STATUS', productId: 'product:flash-sale-2', isLocked: true },
+        { time: new Date(Date.now() - 45000).toLocaleTimeString(), type: 'LOCK_STATUS', productId: 'product:01903ba8-9d21-f051', isLocked: false },
+        { time: new Date(Date.now() - 47000).toLocaleTimeString(), type: 'INVENTORY_UPDATE', productId: 'product:01903ba8-9d21-f051', remainingStock: 19 },
+        { time: new Date(Date.now() - 50000).toLocaleTimeString(), type: 'LOCK_STATUS', productId: 'product:01903ba8-9d21-f051', isLocked: true },
+    ]);
+    const [activeLocks, setActiveLocks] = useState({
+        'product:demo-lock-1': true,
+        'product:flash-sale-2': true
+    });
+    
+    // Mock user login data
+    const [userLogins] = useState([
+        { id: 'usr_8x9a', name: 'John Doe', email: 'john.doe@example.com', ip: '192.168.1.45', time: new Date(Date.now() - 240000).toLocaleTimeString(), status: 'Success' },
+        { id: 'usr_2b4c', name: 'Alice Smith', email: 'alice.s@example.com', ip: '10.0.0.12', time: new Date(Date.now() - 600000).toLocaleTimeString(), status: 'Success' },
+        { id: 'usr_9f1d', name: 'Bob Johnson', email: 'bob.j@example.com', ip: '172.16.0.5', time: new Date(Date.now() - 1800000).toLocaleTimeString(), status: 'Failed (Wrong Password)' },
+        { id: 'usr_3k7e', name: 'Emma Wilson', email: 'emma.w@example.com', ip: '192.168.1.102', time: new Date(Date.now() - 3600000).toLocaleTimeString(), status: 'Success' },
+        { id: 'usr_5m2n', name: 'Michael Brown', email: 'mike.b@example.com', ip: '10.0.0.44', time: new Date(Date.now() - 7200000).toLocaleTimeString(), status: 'Success' }
+    ]);
 
     useEffect(() => {
         const handleUpdate = (data) => {
@@ -83,6 +104,45 @@ const AdminDashboard = () => {
                                             </tr>
                                         ))
                                     )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* User Logins Section */}
+            <div className="row mt-24">
+                <div className="col-12">
+                    <div className="card shadow-sm border-0 rounded-16 p-24">
+                        <h4 className="mb-16">Recent User Logins</h4>
+                        <div className="table-responsive">
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>IP Address</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {userLogins.map((login, idx) => (
+                                        <tr key={idx}>
+                                            <td><span className="text-gray-500 fw-medium">{login.id}</span></td>
+                                            <td>{login.name}</td>
+                                            <td>{login.email}</td>
+                                            <td><code>{login.ip}</code></td>
+                                            <td>{login.time}</td>
+                                            <td>
+                                                <span className={`badge ${login.status === 'Success' ? 'bg-success' : 'bg-danger'}`}>
+                                                    {login.status}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

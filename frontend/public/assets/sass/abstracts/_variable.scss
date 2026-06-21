@@ -272,4 +272,16 @@ $font-sizes: (
     --font-#{$property}: #{$value};
   }  
 }
+
+body[data-theme="dark"] {
+  --heading-color: 0 0% 100%;
+  --body-color: 210 10% 80%;
+  --body-bg: 210 19% 13%;
+  --border-color: 210 19% 25%;
+
+  --bg-color-one: #050505;
+  --bg-color-two: #111111;
+  --bg-color-three: #222222;
+  --neutral: #FFFFFF;
+}
 /* ========================= Variable Css End ======================== */

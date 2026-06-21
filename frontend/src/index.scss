@@ -12,3 +12,51 @@
   object-fit: cover !important;
   max-width: 100% !important;
 }
+
+/* ========================================================
+   GLOBAL DARK MODE OVERRIDES (Fixes contrast issues)
+   ======================================================== */
+body[data-theme="dark"] {
+  /* Bootstrap Overrides */
+  --bs-body-bg: #0f172a;
+  --bs-body-color: #f8fafc;
+
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+
+  /* Backgrounds */
+  .bg-white, .bg-light, .bg-gray-50, .bg-gray-100 {
+    background-color: #1e293b !important;
+  }
+
+  /* Cards */
+  .card, .common-card, .product-card, .dropdown-menu {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+  }
+
+  /* Text Colors */
+  .text-dark, .text-black, .text-heading, .text-gray-800, .text-gray-900 {
+    color: #f8fafc !important;
+  }
+
+  .text-gray-600, .text-gray-500, .text-muted {
+    color: #cbd5e1 !important;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: #ffffff !important;
+  }
+
+  /* Borders */
+  .border, .border-bottom, .border-top {
+    border-color: #334155 !important;
+  }
+  
+  /* Link hover states */
+  a:hover {
+    color: #38bdf8 !important;
+  }
+}

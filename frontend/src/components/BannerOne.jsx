@@ -81,7 +81,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img1.png" alt="" />
+                                        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=600&auto=format&fit=crop" style={{ borderRadius: '24px', objectFit: 'cover', width: '100%', maxWidth: '597px', height: '354px' }} alt="Groceries" />
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ const BannerOne = () => {
                                         </Link>
                                     </div>
                                     <div className="banner-item__thumb">
-                                        <img src="assets/images/thumbs/banner-img3.png" alt="" />
+                                        <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?q=80&w=600&auto=format&fit=crop" style={{ borderRadius: '24px', objectFit: 'cover', width: '100%', maxWidth: '597px', height: '354px' }} alt="Fresh Vegetables" />
                                     </div>
                                 </div>
                             </div>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import query from "jquery";
 import { Link, NavLink } from "react-router-dom";
+import { useCompare } from "../helper/CompareContext";
 
-const HeaderThree = () => {
+const HeaderThree = ({ category }) => {
+  const { compareList } = useCompare();
   const [scroll, setScroll] = useState(false);
   useEffect(() => {
     window.onscroll = () => {
@@ -662,13 +664,13 @@ const HeaderThree = () => {
                   </span>
                 </Link>
                 <Link
-                  to='/cart'
+                  to='/compare'
                   className='flex-align flex-column gap-8 item-hover-two'
                 >
                   <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                     <i className='ph-fill ph-shuffle' />
                     <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                      2
+                      {compareList ? compareList.length : 0}
                     </span>
                   </span>
                   <span className='text-md text-white item-hover__text d-none d-lg-flex'>
@@ -2180,13 +2182,13 @@ const HeaderThree = () => {
                     </span>
                   </Link>
                   <Link
-                    to='/cart'
+                    to='/compare'
                     className='flex-align flex-column gap-8 item-hover-two'
                   >
                     <span className='text-2xl text-white d-flex position-relative me-6 mt-6 item-hover__text'>
                       <i className='ph-fill ph-shuffle' />
                       <span className='w-16 h-16 flex-center rounded-circle bg-main-two-600 text-white text-xs position-absolute top-n6 end-n4'>
-                        2
+                        {compareList ? compareList.length : 0}
                       </span>
                     </span>
                     <span className='text-md text-white item-hover__text d-none d-lg-flex'>

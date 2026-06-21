@@ -24,11 +24,15 @@ import AdminPage from "./pages/AdminPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AgentBot from "./components/AgentBot";
 import VapiButton from "./components/VapiButton";
+import ThreeDarkModeToggle from "./components/ThreeDarkModeToggle";
 import { Toaster } from 'react-hot-toast';
 import { CartProvider } from "./helper/CartContext";
+import { CompareProvider } from "./helper/CompareContext";
+import ComparePage from "./pages/ComparePage";
 
 function App() {
   return (
+    <CompareProvider>
     <CartProvider>
     <BrowserRouter>
       <Toaster position="top-center" reverseOrder={false} />
@@ -69,11 +73,14 @@ function App() {
           path='/vendor-two-details'
           element={<VendorTwoDetailsPage />}
         />
+        <Route exact path='/compare' element={<ComparePage />} />
       </Routes>
+      <ThreeDarkModeToggle />
       <AgentBot />
       <VapiButton />
     </BrowserRouter>
     </CartProvider>
+    </CompareProvider>
   );
 }
 

@@ -378,13 +378,15 @@ class App {
       borderRadius = 0,
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
-      scrollEase = 0.05
+      scrollEase = 0.05,
+      onItemClick
     } = {}
   ) {
     document.documentElement.classList.remove('no-js');
     this.container = container;
     this.scrollSpeed = scrollSpeed;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
+    this.onItemClick = onItemClick;
     this.onCheckDebounce = debounce(this.onCheck, 200);
     this.createRenderer();
     this.createCamera();
@@ -459,6 +461,7 @@ class App {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
     this.start = e.touches ? e.touches[0].clientX : e.clientX;
+    this.startY = e.touches ? e.touches[0].clientY : e.clientY;
   }
   onTouchMove(e) {
     if (!this.isDown) return;
@@ -466,8 +469,48 @@ class App {
     const distance = (this.start - x) * (this.scrollSpeed * 0.025);
     this.scroll.target = this.scroll.position + distance;
   }
-  onTouchUp() {
+  onTouchUp(e) {
     this.isDown = false;
+    
+    const x = e.changedTouches ? e.changedTouches[0].clientX : (e.clientX || this.start);
+    const y = e.changedTouches ? e.changedTouches[0].clientY : (e.clientY || this.startY);
+    
+    if (Math.abs(this.start - x) < 5 && Math.abs(this.startY - y) < 5 && this.onItemClick) {
+      const rect = this.container.getBoundingClientRect();
+      const clientX = x - rect.left;
+      const clientY = y - rect.top;
+      
+      const mouseX = (clientX / rect.width) * 2 - 1;
+      const mouseY = -(clientY / rect.height) * 2 + 1;
+      
+      const viewportX = mouseX * (this.viewport.width / 2);
+      const viewportY = mouseY * (this.viewport.height / 2);
+      
+      let clickedMedia = null;
+      let minDistance = Infinity;
+
+      for (const media of this.medias) {
+          const dx = media.plane.position.x - viewportX;
+          const dy = media.plane.position.y - viewportY;
+          
+          const width = media.plane.scale.x;
+          const height = media.plane.scale.y;
+          
+          if (Math.abs(dx) < width / 2 && Math.abs(dy) < height / 2) {
+              const dist = Math.sqrt(dx*dx + dy*dy);
+              if (dist < minDistance) {
+                  minDistance = dist;
+                  clickedMedia = media;
+              }
+          }
+      }
+      
+      if (clickedMedia) {
+          const originalIndex = clickedMedia.index % (this.medias.length / 2);
+          this.onItemClick(clickedMedia, originalIndex);
+      }
+    }
+    
     this.onCheck();
   }
   onWheel(e) {
@@ -583,7 +626,8 @@ export default function CircularGallery({
   font = 'bold 30px Figtree',
   fontUrl,
   scrollSpeed = 2,
-  scrollEase = 0.05
+  scrollEase = 0.05,
+  onItemClick
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
@@ -599,7 +643,8 @@ export default function CircularGallery({
         borderRadius,
         font: resolvedFont,
         scrollSpeed,
-        scrollEase
+        scrollEase,
+        onItemClick
       });
     });
 
@@ -607,7 +652,7 @@ export default function CircularGallery({
       isMounted = false;
       if (app) app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase]);
+  }, [items, bend, textColor, borderRadius, font, fontUrl, scrollSpeed, scrollEase, onItemClick]);
   return (
     <div
       className="circular-gallery"

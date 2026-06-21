@@ -4,9 +4,20 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
+    
+    /* 3D Card Effect */
+    background-color: var(--bg-color-two);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+
     &:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        
         .product-card__thumb img {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
     }
     &__cart {   
